@@ -1,0 +1,147 @@
+.page {
+  max-width: 1170px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+/* Блок 1 */
+.heroSection {
+  margin-bottom: 64px;
+  max-width: 965px;
+}
+.pageTitle {
+  font-family: var(--font-main);
+  font-size: 36px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 24px;
+}
+.mainText {
+  font-family: var(--font-main);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #000;
+}
+
+/* Общие стили для секций */
+.section {
+  margin-bottom: 64px;
+}
+.sectionTitle {
+  font-family: var(--font-main);
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #111827;
+}
+
+/* Блок 2: Карточки "Кому помогаем" */
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.card {
+  background: #f9fafb;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 32px 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cardIcon {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+.cardTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: #111827;
+}
+.cardText {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #4b5563;
+  margin: 0;
+}
+
+/* Блок 3: Шаги */
+.stepsRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+.step {
+  flex: 1;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}
+.stepNumber {
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  margin: 0 auto 16px auto;
+}
+.step h4 {
+  font-size: 18px;
+  margin: 0 0 8px 0;
+  color: #111827;
+}
+.step p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.4;
+}
+.stepArrow {
+  font-size: 24px;
+  color: #9ca3af;
+  margin-top: 40px;
+}
+
+/* Блок 4: Цифры */
+.statsSection {
+  display: flex;
+  justify-content: space-between;
+  background: var(--color-primary);
+  border-radius: 16px;
+  padding: 40px;
+  color: #fff;
+}
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.statNumber {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.statLabel {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+/* Адаптив */
+@media (max-width: 900px) {
+  .grid3 { grid-template-columns: 1fr; }
+  .stepsRow { flex-direction: column; align-items: center; }
+  .stepArrow { transform: rotate(90deg); margin: 0; }
+  .statsSection { flex-direction: column; gap: 32px; }
+  .mainText { font-size: 20px; }
+}

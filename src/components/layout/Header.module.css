@@ -1,0 +1,74 @@
+/* Контейнер навигационной панели: 1159×138, top 14 */
+.navPanel {
+  max-width: 1159px;
+  min-height: 138px;
+  margin: 14px auto 0;
+  position: relative;
+}
+
+/* Сам хедер: 1159×65, radius 15, градиент */
+.headerBar {
+  height: 65px;
+  border-radius: 15px;
+  background: var(--header-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 24px;
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+}
+
+.logo {
+  font-family: Impact;
+  font-weight: 700;
+  font-size: 30px;
+  text-decoration: none;
+  color: #000;
+  white-space: nowrap;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 39px;
+}
+
+/* Кнопки-ссылки в хедере: 130×39, Inter SemiBold, белый фон */
+.navLink {
+  width: 130px;
+  height: 39px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 16px;             /* см. примечание про 32px */
+  line-height: 1;
+  letter-spacing: 0;
+  background: #ffffff;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #000;
+  transition: background-color .15s, color .15s;
+}
+
+.navLink:hover { background: #f3f4f6; }
+.navLink.active { color: var(--color-primary); }
+
+.navLink:focus-visible,
+.logo:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .navPanel { min-height: auto; padding: 0 16px; }
+  .headerBar { position: static; height: auto; min-height: 56px; padding: 8px 16px; }
+  .menu { display: none; }
+  .navLink { width: auto; padding: 0 12px; }
+}
