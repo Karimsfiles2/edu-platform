@@ -1,5 +1,56 @@
-import { Button } from '../ui/Button.jsx';
 import styles from './LecturerCard.module.css';
+import { useEffect, useRef, useState } from 'react';
+
+const PLACEHOLDER =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="220" height="235"><rect width="100%" height="100%" fill="#e5e7eb"/></svg>'
+  );
+
+function LazyImage({ src, alt, placeholder = PLACEHOLDER }) {
+  const imgRef = useRef(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) {
+      setShouldLoad(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const node = imgRef.current;
+    if (node) observer.observe(node);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const finalSrc = hasError
+    ? 'https://via.placeholder.com/220x235?text=Фото'
+    : shouldLoad
+      ? src
+      : placeholder;
+
+  return (
+    <img
+      ref={imgRef}
+      src={finalSrc}
+      alt={alt}
+      loading="lazy"
+      onError={() => setHasError(true)}
+    />
+  );
+}
 
 export function LecturerCard({ lecturer }) {
   return (
@@ -7,11 +58,7 @@ export function LecturerCard({ lecturer }) {
       <div className={styles.topSection}>
         <div className={styles.photoColumn}>
           <div className={styles.photoBox}>
-            <img 
-              src={lecturer.photoUrl} 
-              alt={lecturer.name} 
-              onError={(e) => { e.target.src = 'https://via.placeholder.com/220x235?text=Фото'; }} 
-            />
+            <LazyImage src={lecturer.photoUrl} alt={lecturer.name} />
           </div>
           <div className={styles.blueLine}></div>
         </div>
@@ -26,7 +73,6 @@ export function LecturerCard({ lecturer }) {
         </div>
       </div>
 
-     
       <div className={styles.disciplinesSection}>
         <h4 className={styles.sectionTitle}>Программы обучения:</h4>
         {lecturer.disciplines.map((disc, index) => (
@@ -42,7 +88,6 @@ export function LecturerCard({ lecturer }) {
         ))}
       </div>
 
-      
       <div className={styles.tariffsSection}>
         <h4 className={styles.sectionTitle}>Тарифы:</h4>
         <div className={styles.tariffsGrid}>
